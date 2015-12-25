@@ -1,5 +1,2 @@
-# CS 104 Student Repository
-  
-- **Name**: Tianlin Zhang
-- **USC ID**: 1834850974
-- **Email**: tianlinz@usc.edu
+# Undergraduate_SecondYear
+These are some projects created during the second year of my undergraduate education at USC
