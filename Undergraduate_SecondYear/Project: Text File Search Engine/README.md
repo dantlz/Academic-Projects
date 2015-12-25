@@ -1,5 +1,5 @@
-This is the readme file for homework assignment 6.
-The files in the hw6 folder are as follows:
+This is the readme file for my text file search engine.
+The files in this folder are as follows:
 
 **data(folder)**: This folder is a subdirectory data folder to store the data used in the search engine, as well as the **seed** file for the crawler and the **index** file, which is the output file of the crawler and index file of the search engine. 
 
