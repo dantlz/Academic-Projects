@@ -1,0 +1,21 @@
+Problem 1
+	advice
+
+Problem 2
+	see alistint.cpp alistint.h alisttest.cpp
+
+Problem 3
+	see stackint.cpp stackint.h
+
+Problem 4
+	a) The next insertion costs O(10), the following 9 cost O(1). Cost for 10 inserts is n+10. 
+		Runtime = cost/insert = (n+10) / 10 = O(n)
+	b) The next insertion costs O(n+1), the following n^2-1 cost O(1). Cost for n^2+1 inserts is n^2+n. 
+		Runtime = cost/insert = (n^2+n) / (n^2+1) = O(1/n)
+	c) The next pop costs O(n-1), the following (n-1)/2 pops cost O(1). Cost for (n+1)/2 inserts is (3/2)*(n-1)
+		Runtime = cost/insert = ((3/2)*(n-1)) / ((n+1)/2) = O(3) = O(1) It is constant amortized time so it is not a bad idea.
+	d) The next pop costs O(n-1), the following (3/4)*(n-1) pops cost O(1). Cost for (3n+1)/4 inserts is (7/4)*(n-1)
+		Runtime = cost/insert = (7/4)*(n-1) / (3n+1)/4 = O(7) = O(1). Push would have an amortized time of O(n), but pop would have an amortized time of O(1). This results in a lot more pops than push if the usage is eaven, ultimately uneccessarily increasing the number of pops. Specifically, if the user uses more pushes, the worst case would occur because push consumes significantly more runtime and pop can occur frequently and quickly.
+
+Problem 5
+	see boolexpr.cpp

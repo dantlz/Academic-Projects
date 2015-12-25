@@ -1,0 +1,99 @@
+This
+test
+will
+contain
+several
+strange
+edge
+cases
+for
+links
+BEGIN
+Empty
+link
+empty
+anchor
+text
+LINK (, )
+BEGIN
+Empty
+link
+empty
+anchor
+text
+LINK (, )
+BEGIN
+Empty
+link
+empty
+anchor
+text
+with
+words
+following
+LINK (, )
+These
+words
+should
+display
+BEGIN
+Empty
+link
+USC
+anchor
+text
+LINK (, USC)
+BEGIN
+Empty
+anchor
+text
+USC
+link
+LINK (USC, )
+BEGIN
+USC
+link
+and
+anchor
+text
+These
+should
+be
+separate
+words
+LINK (USC, USC)
+BEGIN
+Empty
+link
+empty
+anchor
+text
+with
+several
+spaces
+inside
+LINK (         ,   )
+BEGIN
+Link
+to
+Google
+with
+spaces
+in
+the
+link
+LINK (ww     w.   goo gl   e     .c   om, ww     w.   goo gl   e     .c   om)
+BEGIN
+Link
+with
+strange
+characters
+and
+spaces
+LINK (&   5, @@ 3)
+BEGIN
+Link
+with
+empty
+spaces
+LINK (    ,     )

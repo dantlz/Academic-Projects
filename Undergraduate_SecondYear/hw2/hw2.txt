@@ -1,0 +1,29 @@
+Problem 1
+	a) README.md is unmodified.
+	b) README.md is modified and fun_problem.txt is untracked.
+	c) README.md and fun_problem.txt are both staged.
+	d) Both of the files are modified.
+	e) README.md is staged and fun_problem.txt is unmodified. The content of fun_problem.txt becomes the content before "So far, so good" was added. This is because "git checkout -- <file>" discards local changes.
+	f) README.md is modified because after being added/staged with previous changes, it was modified again with the new words "Fancy git move."
+
+Problem 2
+	N/A
+
+Problem 3
+	a) Θ(n^(3/2))
+	b) Θ(n)
+	c) Θ(n^2)
+
+Problem 4
+	1) A set of strings with each string being one word is suitable. Since we are only interested in storing a group of words, and the count and order of each word doesn't matter, set is does the job most efficiently by having less uneccessary functions than other ADT.
+	2) A map with each student's name being a key and the classes he/she is enrolled in being the values is suitable. Assuming there aren't students who have the same name, a map allows us to quickly and accurately check for information. We can input a student's name, and see all the classes he/she is taking as the values.
+	3) A list of strings with each string being a country name is suitable. A list would preserve the order of its content, which is what we want in this case.
+
+Problem 5
+	see split.cpp
+
+Problem 6
+	see llist.cpp
+
+Problem 7
+	see setCheck.cpp

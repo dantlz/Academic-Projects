@@ -1,0 +1,44 @@
+This
+tests
+for
+the
+empty
+links
+and
+anchors
+Program
+should
+first
+find
+anchor
+and
+link
+for
+bits
+website
+LINK (bits.usc.edu, BITS)
+Next
+it
+must
+also
+be
+able
+to
+interpret
+empty
+anchors
+and
+links
+like
+this
+one
+LINK (, )
+and
+also
+only
+empty
+links
+LINK (, )
+like
+this
+one

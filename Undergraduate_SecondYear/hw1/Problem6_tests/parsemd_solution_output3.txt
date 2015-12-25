@@ -1,0 +1,18 @@
+Students
+should
+ignore
+punctuation
+things
+like
+exclamation
+periods
+random
+things
+But
+still
+be
+able
+to
+get
+links
+LINK (www.somesite.org, somesite)
