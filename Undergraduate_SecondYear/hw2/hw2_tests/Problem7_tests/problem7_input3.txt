@@ -1,0 +1,3 @@
+IN this test CaSe, WE ARE going to CHeCK whether OR NoT theIr code Can Handle VARIOUS CaseS with the Words and With PunctuAtion.
+
+"This is anOther Sentence, With punCtuatIon and vARIoUS cases. But we HAVEnT yet IntroDuced WorDS that Are SeparaTed by Anything Like: ', -, 1234, etc."

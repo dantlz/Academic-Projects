@@ -1,0 +1,9 @@
+file
+punctuation
+period
+file
+punctuation
+period
+This
+quotations
+file

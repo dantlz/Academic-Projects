@@ -1,0 +1,4 @@
+Here is a file, which contains some punctuation, and ends in a period.
+
+"This sentence begings with quotations; the sort that should not be included in the search results for this file."
+
