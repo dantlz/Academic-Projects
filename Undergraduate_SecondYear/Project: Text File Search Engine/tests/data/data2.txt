@@ -1,4 +1,0 @@
-one
-two
-three
-[4](data/data4.txt)

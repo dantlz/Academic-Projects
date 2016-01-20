@@ -1,3 +1,0 @@
-# Comments should be ignored.
-INDEX_FILE = data4/index.txt
-OUTPUT_FILE = data4/index_student.txt

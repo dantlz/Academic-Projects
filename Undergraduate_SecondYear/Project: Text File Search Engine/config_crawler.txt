@@ -1,2 +1,0 @@
-INDEX_FILE  		= data/seed.txt
-OUTPUT_FILE 		= data/index.txt   

@@ -1,2 +1,0 @@
-data4/test1.txt
-data4/test2.txt
