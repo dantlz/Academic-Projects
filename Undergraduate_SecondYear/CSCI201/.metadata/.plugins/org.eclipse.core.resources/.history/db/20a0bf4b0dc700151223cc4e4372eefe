@@ -1,0 +1,8 @@
+package tianlinz_CS201L_assignment2;
+
+import javax.swing.JMenuBar;
+
+public class MainWindow {
+	JMenuBar menuBar = new JMenuBar();
+	
+}

@@ -1,0 +1,23 @@
+1459287289612	Delete element
+1459287655408	Rename compilation unit 'ServerGUI.java'
+1459308960822	Rename local variable 'cs'
+1459314297779	Delete element
+1459316942900	Delete element
+1459316957212	Rename type 'TextEditServerGUI'
+1459370332183	Rename local variable 'cs'
+1459372216235	Rename type 'LoginWIndow'
+1459373345293	Rename field 'firstGroup'
+1459374729145	Rename field 'allButtons'
+1459394798044	Rename field 'loginButton'
+1459395664528	Rename field 'signUpButton'
+1459395677138	Rename field 'loginButton'
+1459443774399	Rename method 'login'
+1459443783942	Rename method 'signUp'
+1459447753097	Rename field 'usernameField'
+1459447763807	Rename field 'passwordField'
+1459447770275	Rename field 'signUp_UasswordField'
+1459447792177	Rename field 'repeatField'
+1459447808564	Rename field 'usernameLabel1'
+1459447824213	Rename field 'usernameField1'
+1459447838964	Rename field 'passwordLabel1'
+1459447894163	Rename field 'passwordField1'

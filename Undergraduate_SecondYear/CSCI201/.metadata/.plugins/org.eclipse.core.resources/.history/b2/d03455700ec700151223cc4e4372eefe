@@ -1,0 +1,18 @@
+package tianlinz_CS201L_assignment2;
+
+import javax.swing.JFrame;
+import javax.swing.JMenuBar;
+
+public class MainWindow extends JFrame{
+
+	private static final long serialVersionUID = 1L;
+	
+	public MainWindow(){
+		super("This is the GUI's title");
+		setSize(400, 300);
+		setLocation(400, 100);
+		setDefaultCloseOperation(EXIT_ON_CLOSE);
+		JMenuBar menuBar = new JMenuBar();
+	
+	}
+}

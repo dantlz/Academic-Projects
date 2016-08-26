@@ -1,0 +1,115 @@
+package tianlinz_CS201L_assignment3;
+
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.net.Socket;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+
+public class MyServerThread extends Thread{
+
+	private ObjectOutputStream oos;
+	private ObjectInputStream ois;
+	private MyServer server;
+	
+	public MyServerThread(Socket s, MyServer ms) {
+		try {
+			oos = new ObjectOutputStream(s.getOutputStream());
+			ois = new ObjectInputStream(s.getInputStream());
+			server = ms;
+			this.start();
+		} catch (IOException ioe) {
+			System.out.println("ERROR 5");
+		}
+	}
+
+	public void sendResult(ReturnParcel result) {
+		//Send to client
+		try {
+			oos.writeObject(result);
+			oos.flush();
+			System.out.println("SENT");
+		} catch (IOException ioe) {
+			System.out.println("ERROR 6");
+		}
+	}
+
+	public void run() {
+		try {
+			while(true) {
+				//Read from client
+				Parcel input = (Parcel)ois.readObject();
+				System.out.println("Serverthread received something");
+				
+				try {
+					Class.forName("com.mysql.jdbc.Driver");
+					//TODO Change the password here
+					Connection conn = DriverManager.getConnection("jdbc:mysql://localhost/TextEditData?useSSL=false&user=root&password=tackee12321");
+					Statement st = conn.createStatement();
+					PreparedStatement ps = conn.prepareStatement(input.getCommand());
+					System.out.println(input.getCommand());
+					
+					//Query
+					if(input.isQuery()){
+						ResultSet rSet = ps.executeQuery();
+						
+						//Authentication
+						if(input.getOperation().equals("AUTHENTICATION")){
+							
+							sendResult(rSet.getString("password"));
+							
+						}
+						//Validity
+						else if(input.getOperation().equals("TAKEN")){
+							
+							
+							server.getGUI().logMessage("Sign-up attempt User:"
+									+input.getUsername()
+									+" Password:"
+									+input.getPassword());
+							boolean taken = false;
+							while (rSet.next()){
+								if(input.getUsername().equals(rSet.getString("username"))){
+									taken = true;
+									break;
+								}
+							}
+							if(taken){
+								server.getGUI().logMessage("Sign-up Failure User:"
+										+input.getUsername());	
+							}
+							else{
+								server.getGUI().logMessage("Sign-up Success User:"
+										+input.getUsername());							
+							}
+							
+							sendResult(new ReturnParcel(input.getOperation(), taken));
+						}
+					}
+					//Just execute
+					else{
+						ps.execute();
+					}
+					st.close();
+					conn.close();
+				} 
+				catch (SQLException sqle) {
+					System.out.println("ERROR 7 - " + sqle.getMessage());
+					sendResult(null);
+				} 
+				catch (ClassNotFoundException cnfe) {
+					System.out.println("ERROR 8");
+					sendResult(null);
+				}	
+
+			}
+		} catch (Exception e){
+			System.out.println("ERROR 9");
+		}
+	}
+}

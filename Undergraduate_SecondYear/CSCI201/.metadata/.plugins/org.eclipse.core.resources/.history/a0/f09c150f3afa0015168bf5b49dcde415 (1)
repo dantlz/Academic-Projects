@@ -1,0 +1,112 @@
+package tianlinz_CS201L_assignment3;
+
+import java.awt.Dimension;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.sql.Savepoint;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JList;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextField;
+import javax.swing.ListSelectionModel;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+
+public class MyFileChooser extends JFrame {
+
+	private static final long serialVersionUID = 1L;
+
+	private JPanel mainPanel;
+	private JLabel topLabel;
+	private JScrollPane scrollPane;
+	private JList<String> list;
+	private JLabel fileLabel;
+	private JTextField fileNameTextField;
+	private JButton cancelButton;
+	private JButton saveButton;
+	
+	public MyFileChooser(){
+		super("File Chooser");
+		instantiateComponents();
+		createGUI();
+		addActions();
+	}
+	
+	public void instantiateComponents(){
+		mainPanel = new JPanel();
+		topLabel = new JLabel("Select a file:");
+		scrollPane = new JScrollPane();
+		list = new JList<String>();
+		list.setVisible(true);
+		fileLabel = new JLabel("File");
+		fileNameTextField = new JTextField(50);
+		cancelButton = new JButton("Cancel");
+		saveButton = new JButton("Save");
+	}
+	
+	public void createGUI(){
+		this.setResizable(false);
+		this.setSize(700, 350);
+		this.setLocation(400, 100);
+		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+		
+		String[] data = {"A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "E", "E", "E", "E", "E", "E", "E", "E", "E"};
+
+		this.add(mainPanel);
+		GridBagLayout layout = new GridBagLayout();
+		double[] a={1,1,1,1,1};
+		layout.columnWeights = a;
+		double[] b={1,1,1,1,1,1,1,1,1,1};
+		layout.rowWeights = b;
+		mainPanel.setLayout(layout);
+		GridBagConstraints gbc = new GridBagConstraints();
+		gbc.gridx = 0;
+		gbc.gridy = 0;
+		gbc.gridwidth = 1;
+		gbc.gridheight = 1;
+		mainPanel.add(topLabel, gbc);
+		gbc.gridy = 1;
+		gbc.gridwidth = 5;
+		gbc.gridheight = 7;
+		mainPanel.add(scrollPane);
+		scrollPane.setPreferredSize(new Dimension(500, 200));
+		scrollPane.add(list);
+		scrollPane.setViewportView(list);
+		list.setListData(data);
+		
+//		list.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
+//		list.setLayoutOrientation(JList.VERTICAL_WRAP);
+
+	}
+	
+	public void addActions(){
+		cancelButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				setVisible(false);
+			}
+		});
+		saveButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				save();
+			}
+		});
+		list.addListSelectionListener(new ListSelectionListener() {
+			@Override
+			public void valueChanged(ListSelectionEvent e) {
+				fileNameTextField.setText(list.getSelectedValue());
+			}
+		});
+	}
+	
+	public void save(){
+		
+	}
+}

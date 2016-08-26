@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename method &apos;tianlinz_CS201L_assignment1.Assignment1.findSuggestions(...)&apos; to &apos;findSuggestionsHelper&apos;&#x0A;- Original project: &apos;tianlinz_CS201L_assignment1_modifiedForAssignment2&apos;&#x0A;- Original element: &apos;tianlinz_CS201L_assignment1.Assignment1.findSuggestions(...)&apos;&#x0A;- Renamed element: &apos;tianlinz_CS201L_assignment1.Assignment1.findSuggestionsHelper(...)&apos;&#x0A;- Update references to refactored element" delegate="false" deprecate="false" description="Rename method &apos;findSuggestions&apos;" flags="589830" id="org.eclipse.jdt.ui.rename.method" input="/src&lt;tianlinz_CS201L_assignment1{Assignment1.java[Assignment1~findSuggestions~QString;~QString;~QInteger;~QVector\&lt;QString;&gt;;~QHashMap\&lt;QCharacter;QString;&gt;;~QTrie;" name="findSuggestionsHelper" references="true" stamp="1455151805710" version="1.0"/>
+</session>

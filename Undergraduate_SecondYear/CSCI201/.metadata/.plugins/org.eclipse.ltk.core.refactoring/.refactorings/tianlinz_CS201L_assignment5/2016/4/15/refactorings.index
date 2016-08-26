@@ -1,0 +1,18 @@
+1459724202907	Rename field 'username'
+1459730128763	Delete element
+1459736071229	Delete element
+1459747771962	Rename local variable 'result'
+1459748227115	Rename type 'LoginWindow'
+1459756643427	Rename package 'tianlinz_CS201L_assignment3'
+1459810276077	Rename method 'authentication'
+1459812092528	Rename method 'encrypt'
+1459812465022	Rename method 'loginOption'
+1459812481511	Rename method 'continueLogin'
+1459812488935	Rename method 'signUpOption'
+1459812497469	Rename method 'offline'
+1459825540650	Rename method 'getFiles'
+1459826229167	Rename method 'getUserFiles'
+1459826509266	Rename method 'getUserFiles'
+1459827093461	Rename field 'files'
+1459827978365	Rename method 'getUserFilenames'
+1459884901399	Rename field 'saveButton'

@@ -1,0 +1,420 @@
+package tianlinz_CS201L_assignment4;
+
+import java.awt.Dimension;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.net.Socket;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
+import javax.swing.SwingConstants;
+
+public class MyClient extends javax.swing.JFrame implements Runnable {
+	private static final long serialVersionUID = 1L;
+	
+	private HelperClasses.MyBackgroundPanel mainPanel;
+	
+	private JPanel introComponents;
+	private JButton loginOptionButton;
+	private JButton signUpOptionButton;
+	private JButton offlineButton;
+	
+	private JPanel signUpComponents;
+	private JLabel usernameLabel;
+	private JTextField signUp_UsernameField;
+	private JLabel passwordLabel;
+	private JPasswordField signUp_PasswordField;
+	private JLabel repeatLabel;
+	private JPasswordField signUp_RepeatField;
+	private JButton signUp_BackButton;
+	private JButton signUpButton;
+	
+	private JPanel loginComponents;
+	private JLabel login_UsernameLabel;
+	private JTextField login_UsernameField;
+	private JLabel login_PasswordLabel;
+	private JPasswordField login_PasswordField;
+	private JButton login_BackButton;
+	private JButton loginButton;
+	
+	private MainWindow mainWindow;
+		
+	private ObjectInputStream ois;
+	private ObjectOutputStream oos;
+	
+	private String username;
+	private String password;
+		
+	
+	public MyClient(){
+		super("TextEdit Login");
+		instantiateComponents();
+		createGUI();
+		addActions();
+	}
+
+	public void instantiateComponents(){
+		mainPanel = new HelperClasses.MyBackgroundPanel();
+		introComponents = new JPanel();
+		loginOptionButton = new JButton("Login");
+		signUpOptionButton = new JButton("Sign Up");
+		offlineButton = new JButton("Offline");
+		
+		signUpComponents= new JPanel();
+		usernameLabel = new JLabel("Username: ");
+		signUp_UsernameField = new JTextField(20);
+		passwordLabel = new JLabel("Password: ");
+		signUp_PasswordField = new JPasswordField(20);
+		repeatLabel = new JLabel("Repeat: ");
+		signUp_RepeatField = new JPasswordField(20);
+		signUp_BackButton = new JButton("Back");
+		signUpButton = new JButton("Sign Up");
+		
+		loginComponents = new JPanel();
+		login_UsernameLabel = new JLabel("Username: ");
+		login_UsernameField = new JTextField(20);
+		login_PasswordLabel = new JLabel("Password: ");
+		login_PasswordField = new JPasswordField(20);		
+		loginButton = new JButton("Login");
+		login_BackButton = new JButton("Back");
+		mainWindow = new MainWindow(this);		
+	}
+	
+	public void createGUI(){
+		this.setResizable(false);
+		this.setSize(900, 500);
+		this.setLocation(400, 100);
+		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+
+		this.add(mainPanel);
+		mainPanel.setLayout(new GridBagLayout());
+		mainPanel.add(introComponents);
+		introComponents.setLayout(new GridBagLayout());
+		introComponents.add(loginOptionButton);
+		introComponents.add(signUpOptionButton);
+		introComponents.add(offlineButton);	
+		introComponents.setVisible(true);
+		
+		mainPanel.add(signUpComponents);
+		signUpComponents.setLayout(new GridBagLayout());
+		GridBagConstraints gbc = new GridBagConstraints();
+		gbc.gridy = 0;
+		gbc.gridx = 0;
+		usernameLabel.setHorizontalAlignment(SwingConstants.RIGHT);
+		usernameLabel.setPreferredSize(new Dimension(80, 30));
+		signUpComponents.add(usernameLabel, gbc);
+		gbc.gridx = 1;
+		signUp_UsernameField.setHorizontalAlignment(SwingConstants.LEFT);
+		signUp_UsernameField.setPreferredSize(new Dimension(150, 30));
+		signUpComponents.add(signUp_UsernameField, gbc);
+		gbc.gridy = 1;
+		gbc.gridx = 0;
+		passwordLabel.setHorizontalAlignment(SwingConstants.RIGHT);
+		passwordLabel.setPreferredSize(new Dimension(80, 30));
+		signUpComponents.add(passwordLabel,gbc);
+		gbc.gridx = 1;
+		signUp_PasswordField.setHorizontalAlignment(SwingConstants.LEFT);
+		signUp_PasswordField.setPreferredSize(new Dimension(150, 30));
+		signUpComponents.add(signUp_PasswordField,gbc);		
+		gbc.gridy = 2;
+		gbc.gridx = 0;
+		repeatLabel.setHorizontalAlignment(SwingConstants.RIGHT);
+		repeatLabel.setPreferredSize(new Dimension(80, 30));
+		signUpComponents.add(repeatLabel,gbc);
+		gbc.gridx = 1;
+		signUp_RepeatField.setHorizontalAlignment(SwingConstants.LEFT);
+		signUp_RepeatField.setPreferredSize(new Dimension(150, 30));
+		signUpComponents.add(signUp_RepeatField,gbc);
+		gbc.gridy = 3;
+		gbc.gridx = 0;
+		signUpComponents.add(signUp_BackButton, gbc);
+		gbc.gridx = 1;
+		signUpComponents.add(signUpButton,gbc);
+		signUpComponents.setVisible(false);
+		
+		
+		mainPanel.add(loginComponents);
+		loginComponents.setLayout(new GridBagLayout());
+		gbc.gridy = 0;
+		gbc.gridx = 0;
+		login_UsernameLabel.setHorizontalAlignment(SwingConstants.RIGHT);
+		login_UsernameLabel.setPreferredSize(new Dimension(80, 30));
+		loginComponents.add(login_UsernameLabel, gbc);
+		gbc.gridx = 1;
+		login_UsernameField.setHorizontalAlignment(SwingConstants.LEFT);
+		login_UsernameField.setPreferredSize(new Dimension(150, 30));
+		loginComponents.add(login_UsernameField, gbc);
+		gbc.gridy = 1;
+		gbc.gridx = 0;
+		login_PasswordLabel.setHorizontalAlignment(SwingConstants.RIGHT);
+		login_PasswordLabel.setPreferredSize(new Dimension(80, 30));
+		loginComponents.add(login_PasswordLabel,gbc);
+		gbc.gridx = 1;
+		login_PasswordField.setHorizontalAlignment(SwingConstants.LEFT);
+		login_PasswordField.setPreferredSize(new Dimension(150, 30));
+		loginComponents.add(login_PasswordField,gbc);		
+		gbc.gridy = 2;
+		gbc.gridx = 0;
+		loginComponents.add(login_BackButton, gbc);
+		gbc.gridx = 1;
+		loginComponents.add(loginButton, gbc);
+		loginComponents.setVisible(false);	
+	}
+	
+	public void addActions(){
+		loginOptionButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				loginOption();
+			}
+		});
+		signUpOptionButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				signUpOption();
+			}
+		});
+		offlineButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				offline();
+			}
+		});
+		signUp_BackButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				toggleIntroButtons();
+			}
+		});
+		signUpButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				signUp();
+			}
+		});
+		login_BackButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				toggleIntroButtons();
+			}
+		});
+		loginButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				login();
+			}
+		});
+	}
+	
+	public void toggleIntroButtons(){
+		if(introComponents.isVisible()){
+			introComponents.setVisible(false);
+		}
+		else{
+			introComponents.setVisible(true);
+		}
+		loginComponents.setVisible(false);
+		signUpComponents.setVisible(false);
+		clearAllFields();
+	}
+	
+	public void loginOption(){
+		connectToServer();
+		toggleIntroButtons();
+		loginComponents.setVisible(true);
+	}
+	
+	public void signUpOption(){
+		connectToServer();
+		toggleIntroButtons();
+		signUpComponents.setVisible(true);
+	}
+	
+	public void offline(){
+		mainWindow.setVisible(true);
+		this.setVisible(false);
+		clearAllFields();
+	}
+	
+	public void connectToServer(){
+		Socket s = null;
+		try {
+			s = new Socket("localhost", 6789);
+			oos = new ObjectOutputStream(s.getOutputStream());
+			ois = new ObjectInputStream(s.getInputStream());
+			new Thread(this).start();	
+		} catch (IOException ioe) {
+			ioe.printStackTrace();
+			JOptionPane.showMessageDialog(this, Constants.serverUnreachable, "Sign up failed", JOptionPane.WARNING_MESSAGE);
+			offline();
+		} 
+	}
+	
+	public void signUp(){
+		//Get data
+		username = signUp_UsernameField.getText();
+		password = HelperMethods.encrypt(new String(signUp_PasswordField.getPassword()));
+		String repeat = HelperMethods.encrypt(new String(signUp_RepeatField.getPassword()));		
+
+		//Check validity of data
+		if(!password.equals(repeat)){
+			JOptionPane.showMessageDialog(this, Constants.passwordRepeatMismatch, "Sign up failed", JOptionPane.WARNING_MESSAGE);
+			return;
+		}	
+		boolean hasUpperCase = false;
+		boolean hasNum = false;
+		for(char entry: signUp_PasswordField.getPassword()){
+			if(Character.isDigit(entry)){
+				hasNum = true;
+			}
+			else if(Character.isUpperCase(entry)){
+				hasUpperCase = true;
+			}
+		}
+		if((!hasUpperCase)||(!hasNum)){
+			JOptionPane.showMessageDialog(this, Constants.passwordRequirements, "Sign up failed", JOptionPane.WARNING_MESSAGE);
+			return;
+		}
+		clearAllFields();
+		
+		//Query server to check for validity
+		try {
+			Parcel parcel = new Parcel(true, "TAKEN", "SELECT * FROM Users", username, password);
+			oos.writeObject(parcel);
+		} catch (IOException ioe) {
+			ioe.printStackTrace();
+			JOptionPane.showMessageDialog(this, Constants.serverUnreachable, "Sign up failed", JOptionPane.WARNING_MESSAGE);
+			offline();
+			return;
+		}
+	}
+	
+	private void finishSignUp(ReturnParcel result){
+		if(result.getResult()){
+			JOptionPane.showMessageDialog(this, Constants.usernameTaken, "Sign up failed", JOptionPane.WARNING_MESSAGE);
+		}
+		else{
+			//Username and password are valid and not taken
+			//Insert combination into server
+			try {
+				Parcel parcel = new Parcel(false,"INSERT","INSERT INTO Users (username, password) VALUES ('"+username+"','"+password+"')",  null, null);
+				oos.writeObject(parcel);
+			} catch (IOException ioe) {
+				ioe.printStackTrace();
+				JOptionPane.showMessageDialog(this, Constants.serverUnreachable, "Sign up failed", JOptionPane.WARNING_MESSAGE);
+				offline();
+			}
+			
+			//Pass the user through
+			this.setVisible(false);
+			mainWindow.setUsername(username);
+			mainWindow.setVisible(true);
+		}
+	}
+	
+	public void login(){
+		username = login_UsernameField.getText();
+		password = HelperMethods.encrypt(new String(login_PasswordField.getPassword()));
+		clearAllFields();
+
+		try {
+			Parcel parcel = new Parcel(true, "AUTHENTICATION", "SELECT * from Users WHERE username='"+username+"'", username, password);
+			oos.writeObject(parcel);				
+		} 
+		catch (IOException ioe) {
+			ioe.printStackTrace();
+			JOptionPane.showMessageDialog(this, Constants.serverUnreachable, "Login failed", JOptionPane.WARNING_MESSAGE);
+			offline();
+			return;
+		}
+	}
+	
+	public void finishLogin(ReturnParcel result){
+		if(result.getResult()){
+			//LOG IN
+			this.setVisible(false);
+			mainWindow.setUsername(username);
+			mainWindow.setVisible(true);
+		}
+		else{
+			JOptionPane.showMessageDialog(this, Constants.invalidCombination, "Login failed", JOptionPane.ERROR_MESSAGE);
+		}
+	}
+	
+	public void clearAllFields(){
+		login_UsernameField.setText("");
+		login_PasswordField.setText("");
+		signUp_UsernameField.setText("");
+		signUp_PasswordField.setText("");
+		signUp_RepeatField.setText("");
+	}
+
+	public void getUserFiles(String purpose){
+		//Query server to check for validity
+		try {
+			Parcel parcel = new Parcel(true, "GETFILES"+purpose, "SELECT * FROM Files WHERE username='"+username+"'", username, "");
+			oos.writeObject(parcel);
+		} catch (IOException ioe) {
+			ioe.printStackTrace();
+			JOptionPane.showMessageDialog(this, Constants.serverUnreachable, "Could not get files", JOptionPane.WARNING_MESSAGE);
+			offline();
+			return;
+		}
+	}
+	
+	public void saveFile(String filename, String fileContent){
+		try {
+			Parcel parcel = new Parcel(false, "SAVEFILE", "INSERT INTO Files(username,filename,fileContent)"
+					+ "VALUES('" +username+ "','"+filename+"','"+fileContent+"')", username, filename);
+			oos.writeObject(parcel);
+		} catch (IOException ioe) {
+			ioe.printStackTrace();
+			JOptionPane.showMessageDialog(this, Constants.serverUnreachable, "Could not get files", JOptionPane.WARNING_MESSAGE);
+			offline();
+			return;
+		}
+	}
+	
+	public void run() {
+		while(true) {
+			//Read from server
+			try {
+				Object received = ois.readObject();
+				if(received == null){
+					//TODO Server cannot be reached
+				}
+				else{
+					ReturnParcel result = (ReturnParcel)received;
+					String operation = result.getOperation();
+					switch (operation) {
+					case "TAKEN":
+						finishSignUp(result);
+						break;
+
+					case "AUTHENTICATION":
+						finishLogin(result);
+						break;
+					case "GETFILES_SAVE":
+						mainWindow.saveFileOnline(result.getFiles());
+						break;
+					case "GETFILES_OPEN":
+						mainWindow.openFileOnline(result.getFiles());
+					case "ERROR":
+						//TODO ERROR
+						break;
+					}
+				}
+			} catch (ClassNotFoundException | IOException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+}
